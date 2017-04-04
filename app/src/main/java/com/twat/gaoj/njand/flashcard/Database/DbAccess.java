@@ -61,11 +61,9 @@ public interface DbAccess {
      * @param percentCorrectAllTime
      * @param totalTime
      * @param sessionsCompleted
-     * @param averageTime
      */
     void updateStats(int setId, float percentCorrectThisSession, int timeThisSession,
-                     float percentCorrectAllTime, int totalTime, int sessionsCompleted,
-                     float averageTime);
+                     float percentCorrectAllTime, int totalTime, int sessionsCompleted);
     /**
      * Close the database.
      */
