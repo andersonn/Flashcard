@@ -85,8 +85,7 @@ public class MyDbAccess implements DbAccess {
 
     @Override
     public void updateStats(int setId, float percentCorrectThisSession, int timeThisSession,
-                            float percentCorrectAllTime, int totalTime, int sessionsCompleted,
-                            float averageTime) {
+                            float percentCorrectAllTime, int totalTime, int sessionsCompleted) {
 
         ContentValues values = new ContentValues();
         values.put(FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION, percentCorrectThisSession);
@@ -94,7 +93,6 @@ public class MyDbAccess implements DbAccess {
         values.put(FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME, percentCorrectAllTime);
         values.put(FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME, totalTime);
         values.put(FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED, sessionsCompleted);
-        values.put(FlashcardTableEntries.COLUMN_NAME_AVG_TIME, averageTime);
 
         String[] args = {Integer.toString(setId)};
         mDb.update(FlashcardTableEntries.TABLE_NAME, values, UpdateQueries.SQL_UPDATE_STATS, args);
