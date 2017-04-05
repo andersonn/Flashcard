@@ -76,8 +76,7 @@ public class MyDbAccess implements DbAccess {
                             FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME,
                             FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME,
-                            FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED,
-                            FlashcardTableEntries.COLUMN_NAME_AVG_TIME};
+                            FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED};
 
         String args[] = {Integer.toString(setId)};
         return mDb.query(FlashcardTableEntries.TABLE_NAME, columns, SelectQueries.SQL_FIND_SET,args, null, null, null);
