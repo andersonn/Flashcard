@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.twat.gaoj.njand.flashcard.EditSetFragment">
 
     <TextView
         android:text="Set Name"
@@ -11,7 +14,7 @@
         android:id="@+id/Name_Of_Set"
         android:textSize="28sp" />
 
-    <ListView
+    <ListView android:id="@+id/cards_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1" />
@@ -25,4 +28,16 @@
         android:id="@+id/add_new_card"
         android:layout_gravity="bottom|right"
         app:backgroundTint="@android:color/holo_green_light" />
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        app:fabSize="mini"
+        app:srcCompat="@android:drawable/ic_menu_revert"
+        android:id="@+id/back_from_edit_set"
+        android:layout_gravity="bottom|left" />
+
+
 </LinearLayout>

@@ -18,6 +18,7 @@ public class DatabaseContract {
         public static final String COLUMN_NAME_PERCENT_CORRECT_ALL_TIME = "pcAll";
         public static final String COLUMN_NAME_TOTAL_TIME = "tTotal";
         public static final String COLUMN_NAME_SESSIONS_COMPLETED = "sCompleted";
+        public static final String COLUMN_NAME_AVG_TIME = "tAvg";
     }
 
     public static class CardEntries implements BaseColumns{
