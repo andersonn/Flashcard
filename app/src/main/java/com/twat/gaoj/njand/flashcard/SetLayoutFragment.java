@@ -9,14 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class SetLayoutFragment extends Fragment {
     MainActivity mainActivity;
     TextView setTitle;
     TextView cardCount;
+    Integer cardCounter;
     Button editSetButton;
+    Button studyButt;
     FloatingActionButton backButton;
     String currentID;
+    FloatingActionButton deleteButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -35,6 +39,25 @@ public class SetLayoutFragment extends Fragment {
         backButton = (FloatingActionButton) view.findViewById(R.id.back_button);
         backButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                mainActivity.switchFragment("main menu", "");
+            }
+        });
+
+        studyButt = (Button) view.findViewById(R.id.studyButton);
+        studyButt.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                if (cardCounter < 4) {
+                    Toast.makeText(getActivity(), "Study requires at least 4 cards in the set!", Toast.LENGTH_LONG).show();
+                } else {
+                    mainActivity.switchFragment("study", setTitle.getText() + "," + currentID);
+                }
+            }
+        });
+
+        deleteButton = (FloatingActionButton) view.findViewById(R.id.delete_button);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mainActivity.mDbAccess.deleteSet(Integer.parseInt(currentID));
                 mainActivity.switchFragment("main menu", "");
             }
         });
@@ -58,15 +81,12 @@ public class SetLayoutFragment extends Fragment {
 
         Cursor cursor = mainActivity.mDbAccess.getCardsInSet(id);
 
-        int counter = 0;
+        cardCounter = 0;
         while (cursor.moveToNext()) {
-            counter += 1;
+            cardCounter += 1;
         }
-        cardCount.setText(Integer.toString(counter));
+        cardCount.setText(Integer.toString(cardCounter));
 
         super.onResume();
-
     }
-
-
 }
