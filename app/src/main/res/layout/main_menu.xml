@@ -20,6 +20,13 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:text="Your Flashcard Sets"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/main_menu_title"
+                android:textSize="28sp" />
+
             <ListView android:id="@+id/sets_list"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
