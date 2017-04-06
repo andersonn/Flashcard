@@ -27,7 +27,6 @@ public class MainMenuFragment extends Fragment {
     ArrayList<Integer> databaseIds = new ArrayList<Integer>();    // Ids for the names in the list view
     Map<Integer, Integer> map = new HashMap<Integer, Integer>();
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.main_menu, container, false);

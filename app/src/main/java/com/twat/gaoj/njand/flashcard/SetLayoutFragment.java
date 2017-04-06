@@ -46,8 +46,8 @@ public class SetLayoutFragment extends Fragment {
         studyButt = (Button) view.findViewById(R.id.studyButton);
         studyButt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                if (cardCounter == 0) {
-                    Toast.makeText(getActivity(), "No cards to study!", Toast.LENGTH_LONG).show();
+                if (cardCounter < 4) {
+                    Toast.makeText(getActivity(), "Study requires at least 4 cards in the set!", Toast.LENGTH_LONG).show();
                 } else {
                     mainActivity.switchFragment("study", setTitle.getText() + "," + currentID);
                 }
@@ -88,8 +88,5 @@ public class SetLayoutFragment extends Fragment {
         cardCount.setText(Integer.toString(cardCounter));
 
         super.onResume();
-
     }
-
-
 }

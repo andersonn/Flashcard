@@ -2,13 +2,18 @@ package com.twat.gaoj.njand.flashcard;
 
 import android.database.Cursor;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
+
+import java.util.Random;
 import android.support.v4.app.Fragment;
+import java.util.Collections;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.twat.gaoj.njand.flashcard.Database.DatabaseContract;
 
@@ -21,14 +26,16 @@ public class StudyFragment extends Fragment {
     TextView questionText;
     String currentID;
     String setTitle;
+    RadioGroup radioGroup;
 
     ArrayList<String> questionsList;
     ArrayList<String> answersList;
-    Integer studyIndex = 0;
+    int studyIndex = 0;
+    String selection = "";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.study, container, false);
+        final View view = inflater.inflate(R.layout.study, container, false);
 
         cancelButton = (Button)view.findViewById(R.id.cancel_study);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -39,15 +46,39 @@ public class StudyFragment extends Fragment {
 
         questionText = (TextView)view.findViewById(R.id.question);
 
+        radioGroup = (RadioGroup)view.findViewById(R.id.choices);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener()
+        {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton selected=(RadioButton)view.findViewById(checkedId);
+                try {
+                    selection = selected.getText().toString();
+                } catch (Exception e) {
+                    selection = "";
+                }
+            }
+        });
+
         submitButton = (Button)view.findViewById(R.id.submit);
         submitButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                // Check if right
+                if (selection == answersList.get(studyIndex)) {
+                    Toast.makeText(getActivity(), "Correct!", Toast.LENGTH_LONG).show();
+                } else {
+                    Toast.makeText(getActivity(), "Incorrect. Correct answer was " + answersList.get(studyIndex), Toast.LENGTH_LONG).show();
+                }
+
+                // Move onto next card
                if (studyIndex >= questionsList.size() - 1) {
                    studyIndex = 0;
                } else {
                    studyIndex += 1;
+                   generateChoices(studyIndex);
                }
                 questionText.setText(questionsList.get(studyIndex));
+                radioGroup.clearCheck();
             }
         });
 
@@ -78,9 +109,27 @@ public class StudyFragment extends Fragment {
             answersList.add(back);
         }
 
-        questionText.setText(questionsList.get(studyIndex));
+        generateChoices(studyIndex);
         super.onResume();
     }
 
+    public void generateChoices(int cardIndex) {
+        Random random = new Random();
+        String correctString = answersList.get(cardIndex);
 
+        ArrayList<String> choices = new ArrayList<String>(answersList.size());
+        for (String choice : answersList) choices.add(choice); // Make choices, a copy of answersList
+        choices.remove(cardIndex); // Remove correct answer from possible choices
+        Collections.shuffle(choices); // Shuffle choices
+
+        choices = new ArrayList<String>(choices.subList(0,3)); // Take first 3 from shuffled choices
+        choices.add(correctString); // Add correct choice
+        Collections.shuffle(choices); // Shuffle
+
+        questionText.setText(questionsList.get(cardIndex));
+        for (int i=0; i< radioGroup.getChildCount(); i++) {
+            RadioButton rbutton = (RadioButton)radioGroup.getChildAt(i);
+            rbutton.setText(choices.get(i));
+        }
+    }
 }

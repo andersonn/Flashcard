@@ -16,15 +16,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="3">
 
-            <android.support.design.widget.FloatingActionButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                app:fabSize="mini"
-                app:srcCompat="@android:drawable/ic_menu_revert"
-                android:id="@+id/back_button"
-                android:layout_weight="1" />
-
             <TextView
                 android:text="Name of Set"
                 android:layout_width="match_parent"
@@ -59,6 +50,16 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <android.support.design.widget.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            app:fabSize="mini"
+            app:srcCompat="@android:drawable/ic_menu_revert"
+            android:id="@+id/back_button"
+            android:layout_gravity="bottom|left"
+            android:layout_weight="1" />
 
         <Button
             android:text="Study"
