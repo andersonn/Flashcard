@@ -64,6 +64,13 @@ public interface DbAccess {
      */
     void updateStats(int setId, float percentCorrectThisSession, int timeThisSession,
                      float percentCorrectAllTime, int totalTime, int sessionsCompleted);
+
+    /**
+     *
+     * @param setId
+     */
+    void deleteSet(int setId);
+
     /**
      * Close the database.
      */

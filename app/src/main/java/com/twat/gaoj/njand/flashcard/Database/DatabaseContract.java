@@ -76,5 +76,11 @@ public class DatabaseContract {
         public static final String SQL_DELETE_CARD_ENTRY =
                 CardEntries._ID + " = ?";
 
+        public static final String SQL_DELETE_SET =
+                FlashcardTableEntries._ID + " = ?";
+
+        public static final String SQL_DELETE_CARDS_BY_SET =
+                CardEntries.COLUMN_NAME_SET + " = ?";
+
     }
 }

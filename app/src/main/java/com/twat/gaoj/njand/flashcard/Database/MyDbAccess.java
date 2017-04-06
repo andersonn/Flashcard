@@ -55,6 +55,17 @@ public class MyDbAccess implements DbAccess {
     }
 
     @Override
+    public void deleteSet(int setId) {
+        String [] args = {Integer.toString(setId)};
+
+        //Delete cards in set.
+        mDb.delete(CardEntries.TABLE_NAME, DeleteQueries.SQL_DELETE_CARDS_BY_SET, args);
+
+        //Delete set
+        mDb.delete(FlashcardTableEntries.TABLE_NAME, DeleteQueries.SQL_DELETE_SET, args);
+    }
+
+    @Override
     public void updateCardInSet(int cardId, String front, String back) {
         ContentValues values = new ContentValues();
         values.put(CardEntries.COLUMN_NAME_FRONT, CardEntries.COLUMN_NAME_BACK);
