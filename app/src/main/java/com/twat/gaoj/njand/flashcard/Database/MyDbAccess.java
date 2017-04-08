@@ -91,7 +91,7 @@ public class MyDbAccess implements DbAccess {
 
     @Override
     public Cursor getStatsOnSet(int setId) {
-        String columns[] = {FlashcardTableEntries._ID, FlashcardTableEntries.COLUMN_NAME_TITLE,
+        String columns[] = {FlashcardTableEntries.COLUMN_NAME_TITLE,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME,
