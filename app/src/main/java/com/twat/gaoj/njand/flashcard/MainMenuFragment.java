@@ -79,7 +79,7 @@ public class MainMenuFragment extends Fragment {
         Cursor cursor = mainActivity.mDbAccess.getSets();
 
         // Iterate through results and store them in a list
-        List names = new ArrayList<String>();
+        List<String> names = new ArrayList<String>();
         databaseIds.clear();
         while (cursor.moveToNext()) {
             String name = cursor.getString(cursor.getColumnIndex(FlashcardTableEntries.COLUMN_NAME_TITLE));

@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -68,6 +69,15 @@ public class EditSetFragment extends Fragment {
             }
         });
 
+        cardsListView = (ListView) view.findViewById(R.id.cards_list);
+        cardsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int databaseID = map.get(position);
+                mainActivity.switchFragment("edit card", setName.getText() + "," + Integer.toString(currentID) + "," + Integer.toString(databaseID)); //send along set info too, so you can return to the right set afterward
+            }
+        });
+
         displayCards();
 
         return view;
@@ -95,16 +105,16 @@ public class EditSetFragment extends Fragment {
     public void displayCards() {
         Cursor cursor = mainActivity.mDbAccess.getCardsInSet(currentID);
         // Iterate through results and store them in a list
-        List names = new ArrayList<String>();
+        List<String> names = new ArrayList<String>();
         databaseIds.clear();
         while (cursor.moveToNext()) {
             String front = cursor.getString(cursor.getColumnIndex(DatabaseContract.CardEntries.COLUMN_NAME_FRONT));
             names.add(front);
-            databaseIds.add(cursor.getInt(cursor.getColumnIndex(DatabaseContract.FlashcardTableEntries._ID)));
+            databaseIds.add(cursor.getInt(cursor.getColumnIndex(DatabaseContract.CardEntries._ID)));
         }
         cursor.close();
 
-        // Display the sets to the list view
+        // Display the cards to the list view
         ArrayAdapter adapter = new ArrayAdapter(getContext(), android.R.layout.simple_list_item_1, names);
         cardsListView.setAdapter(adapter);
         int count = 0;
