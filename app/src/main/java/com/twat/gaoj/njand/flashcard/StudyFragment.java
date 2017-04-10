@@ -32,6 +32,9 @@ public class StudyFragment extends Fragment {
     ArrayList<String> answersList;
     int studyIndex = 0;
     String selection = "";
+    int correct = 0;
+    int incorrect = 0;
+    long startTime = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +43,16 @@ public class StudyFragment extends Fragment {
         cancelButton = (Button)view.findViewById(R.id.cancel_study);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                int percentCorrect = 0;
+                if (incorrect + correct != 0) {
+                    percentCorrect = (correct * 100) / (correct + incorrect);
+                }
+                int sessionDuration = (int) ((System.currentTimeMillis() - startTime) / 1000);
+                Cursor statCursor = mainActivity.mDbAccess.getStatsOnSet(Integer.parseInt(currentID));
+                statCursor.moveToNext();
+                int totalTime = Integer.parseInt(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME)));
+                int totalSessions = Integer.parseInt(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED)));
+                mainActivity.mDbAccess.updateStats(Integer.parseInt(currentID), percentCorrect, sessionDuration, 0, totalTime + sessionDuration, ++totalSessions);
                 mainActivity.switchFragment("set layout", setTitle + "," + currentID);
             }
         });
@@ -66,8 +79,10 @@ public class StudyFragment extends Fragment {
                 // Check if right
                 if (selection == answersList.get(studyIndex)) {
                     Toast.makeText(getActivity(), "Correct!", Toast.LENGTH_LONG).show();
+                    correct++;
                 } else {
                     Toast.makeText(getActivity(), "Incorrect. Correct answer was " + answersList.get(studyIndex), Toast.LENGTH_LONG).show();
+                    incorrect++;
                 }
 
                 // Move onto next card
@@ -110,6 +125,11 @@ public class StudyFragment extends Fragment {
         }
 
         generateChoices(studyIndex);
+
+        startTime = System.currentTimeMillis();
+        correct = 0;
+        incorrect = 0;
+
         super.onResume();
     }
 
@@ -131,5 +151,6 @@ public class StudyFragment extends Fragment {
             RadioButton rbutton = (RadioButton)radioGroup.getChildAt(i);
             rbutton.setText(choices.get(i));
         }
+
     }
 }

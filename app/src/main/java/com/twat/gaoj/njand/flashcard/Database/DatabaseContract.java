@@ -56,6 +56,9 @@ public class DatabaseContract {
 
         public static final String SQL_FIND_CARD_IN_SET =
                 CardEntries.COLUMN_NAME_SET + " = ?";
+
+        public static final String SQL_FIND_CARD_IN_SET_BY_ID =
+                CardEntries._ID + " = ?";
     }
 
     public static class UpdateQueries{

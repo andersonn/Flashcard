@@ -40,6 +40,14 @@ public class MyDbAccess implements DbAccess {
     }
 
     @Override
+    public Cursor getCardById(int cardId) {
+        String columns[] = {CardEntries.COLUMN_NAME_FRONT, CardEntries.COLUMN_NAME_BACK};
+        String args[] = {Integer.toString(cardId)};
+
+        return mDb.query(CardEntries.TABLE_NAME, columns, SelectQueries.SQL_FIND_CARD_IN_SET_BY_ID, args, null, null, null);
+    }
+
+    @Override
     public void addCardToSet(int setId, String front, String back) {
         ContentValues values = new ContentValues();
         values.put(CardEntries.COLUMN_NAME_FRONT, front);
@@ -68,7 +76,8 @@ public class MyDbAccess implements DbAccess {
     @Override
     public void updateCardInSet(int cardId, String front, String back) {
         ContentValues values = new ContentValues();
-        values.put(CardEntries.COLUMN_NAME_FRONT, CardEntries.COLUMN_NAME_BACK);
+        values.put(CardEntries.COLUMN_NAME_FRONT, front);
+        values.put(CardEntries.COLUMN_NAME_BACK, back);
         String[] args = {Integer.toString(cardId)};
         mDb.update(CardEntries.TABLE_NAME, values, UpdateQueries.SQL_UPDATE_CARD_IN_SET, args);
     }
@@ -82,7 +91,7 @@ public class MyDbAccess implements DbAccess {
 
     @Override
     public Cursor getStatsOnSet(int setId) {
-        String columns[] = {FlashcardTableEntries._ID, FlashcardTableEntries.COLUMN_NAME_TITLE,
+        String columns[] = {FlashcardTableEntries.COLUMN_NAME_TITLE,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME,

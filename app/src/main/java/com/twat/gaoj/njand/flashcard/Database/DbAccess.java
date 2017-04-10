@@ -19,6 +19,13 @@ public interface DbAccess {
     public Cursor getCardsInSet(int setId);
 
     /**
+     * gets a single card given its id and set
+     * @param setId - primary key of set.
+     * @param cardId - primary key of this card.
+     */
+    public Cursor getCardById(int cardId);
+
+    /**
      *
      * @param setId - primary key of set
      * @param front - question on front of card.

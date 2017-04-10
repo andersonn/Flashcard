@@ -13,6 +13,8 @@ public class MainActivity extends FragmentActivity {
     SetLayoutFragment setLayoutFragment;
     MainMenuFragment mainMenuFragment;
     StudyFragment studyFragment;
+    EditCardFragment editCardFragment;
+    StatsFragment statsFragment;
     DbAccess mDbAccess;
 
     @Override
@@ -39,6 +41,16 @@ public class MainActivity extends FragmentActivity {
         if (studyFragment == null) {
             studyFragment = new StudyFragment();
             studyFragment.setActivity(this);
+        }
+
+        if (editCardFragment == null) {
+            editCardFragment = new EditCardFragment();
+            editCardFragment.setActivity(this);
+        }
+
+        if (statsFragment == null) {
+            statsFragment = new StatsFragment();
+            statsFragment.setActivity(this);
         }
 
         FragmentManager fm = getSupportFragmentManager();
@@ -73,6 +85,16 @@ public class MainActivity extends FragmentActivity {
             FragmentManager fm = getSupportFragmentManager();
             studyFragment.setArguments(bundle);
             fm.beginTransaction().replace(R.id.activity_main, studyFragment).commit();
+        }
+        else if (newFragment == "edit card") {
+            FragmentManager fm = getSupportFragmentManager();
+            editCardFragment.setArguments(bundle);
+            fm.beginTransaction().replace(R.id.activity_main, editCardFragment).commit();
+        }
+        else if (newFragment == "stats") {
+            FragmentManager fm = getSupportFragmentManager();
+            statsFragment.setArguments(bundle);
+            fm.beginTransaction().replace(R.id.activity_main, statsFragment).commit();
         }
     }
 }

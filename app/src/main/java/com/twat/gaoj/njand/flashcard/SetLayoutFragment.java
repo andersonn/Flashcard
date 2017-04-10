@@ -18,6 +18,7 @@ public class SetLayoutFragment extends Fragment {
     Integer cardCounter;
     Button editSetButton;
     Button studyButt;
+    Button statsButton;
     FloatingActionButton backButton;
     String currentID;
     FloatingActionButton deleteButton;
@@ -44,6 +45,7 @@ public class SetLayoutFragment extends Fragment {
         });
 
         studyButt = (Button) view.findViewById(R.id.studyButton);
+        // ^me too
         studyButt.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 if (cardCounter < 4) {
@@ -59,6 +61,13 @@ public class SetLayoutFragment extends Fragment {
             public void onClick(View v) {
                 mainActivity.mDbAccess.deleteSet(Integer.parseInt(currentID));
                 mainActivity.switchFragment("main menu", "");
+            }
+        });
+
+        statsButton = (Button) view.findViewById(R.id.statsButton);
+        statsButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                mainActivity.switchFragment("stats", currentID);
             }
         });
 
