@@ -52,7 +52,7 @@ public class StudyFragment extends Fragment {
                 statCursor.moveToNext();
                 int totalTime = Integer.parseInt(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME)));
                 int totalSessions = Integer.parseInt(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED)));
-                mainActivity.mDbAccess.updateStats(Integer.parseInt(currentID), percentCorrect, sessionDuration, 0, totalTime + sessionDuration, ++totalSessions);
+                mainActivity.mDbAccess.updateStats(Integer.parseInt(currentID), percentCorrect, sessionDuration, totalTime + sessionDuration, ++totalSessions);
                 mainActivity.switchFragment("set layout", setTitle + "," + currentID);
             }
         });

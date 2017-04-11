@@ -94,7 +94,6 @@ public class MyDbAccess implements DbAccess {
         String columns[] = {FlashcardTableEntries.COLUMN_NAME_TITLE,
                             FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION,
                             FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION,
-                            FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME,
                             FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME,
                             FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED};
 
@@ -104,12 +103,11 @@ public class MyDbAccess implements DbAccess {
 
     @Override
     public void updateStats(int setId, float percentCorrectThisSession, int timeThisSession,
-                            float percentCorrectAllTime, int totalTime, int sessionsCompleted) {
+                            int totalTime, int sessionsCompleted) {
 
         ContentValues values = new ContentValues();
         values.put(FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION, percentCorrectThisSession);
         values.put(FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION, timeThisSession);
-        values.put(FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME, percentCorrectAllTime);
         values.put(FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME, totalTime);
         values.put(FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED, sessionsCompleted);
 

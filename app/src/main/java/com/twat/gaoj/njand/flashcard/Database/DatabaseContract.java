@@ -15,10 +15,8 @@ public class DatabaseContract {
         public static final String COLUMN_NAME_TITLE = "title";
         public static final String COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION = "pcToday";
         public static final String COLUMN_NAME_TIME_THIS_SESSION = "tToday";
-        public static final String COLUMN_NAME_PERCENT_CORRECT_ALL_TIME = "pcAll";
         public static final String COLUMN_NAME_TOTAL_TIME = "tTotal";
         public static final String COLUMN_NAME_SESSIONS_COMPLETED = "sCompleted";
-        public static final String COLUMN_NAME_AVG_TIME = "tAvg";
     }
 
     public static class CardEntries implements BaseColumns{
@@ -36,7 +34,6 @@ public class DatabaseContract {
                         FlashcardTableEntries.COLUMN_NAME_TITLE + " TEXT," +
                         FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION + " REAL DEFAULT 0," +
                         FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION + " INTEGER DEFAULT 0," +
-                        FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME + " REAL DEFAULT 0," +
                         FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME + " INTEGER DEFAULT 0," +
                         FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED + " INTEGER DEFAULT 0)";
 

@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import com.twat.gaoj.njand.flashcard.Database.DatabaseContract;
@@ -19,7 +18,6 @@ public class StatsFragment extends Fragment {
     int setID;
     TextView lastCorrect;
     TextView lastTime;
-    TextView totalCorrect;
     TextView totalTime;
     TextView totalSessions;
     TextView averageTime;
@@ -31,7 +29,6 @@ public class StatsFragment extends Fragment {
         setName = (TextView) view.findViewById(R.id.setName);
         lastCorrect = (TextView) view.findViewById(R.id.percentCorrect);
         lastTime = (TextView) view.findViewById(R.id.time);
-        totalCorrect = (TextView) view.findViewById(R.id.percentCorrectAll);
         totalTime = (TextView) view.findViewById(R.id.timeTotal);
         totalSessions = (TextView) view.findViewById(R.id.sessionsCompleted);
         averageTime = (TextView) view.findViewById(R.id.timeAverage);
@@ -63,7 +60,6 @@ public class StatsFragment extends Fragment {
         setName.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_TITLE)));
         lastCorrect.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_THIS_SESSION)));
         lastTime.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_TIME_THIS_SESSION)));
-        totalCorrect.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_PERCENT_CORRECT_ALL_TIME)));
         totalTime.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_TOTAL_TIME)));
         totalSessions.setText(statCursor.getString(statCursor.getColumnIndex(DatabaseContract.FlashcardTableEntries.COLUMN_NAME_SESSIONS_COMPLETED)));
         int totalTimeInt = Integer.parseInt(totalTime.getText().toString());

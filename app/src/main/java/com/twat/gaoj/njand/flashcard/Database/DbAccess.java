@@ -20,7 +20,6 @@ public interface DbAccess {
 
     /**
      * gets a single card given its id and set
-     * @param setId - primary key of set.
      * @param cardId - primary key of this card.
      */
     public Cursor getCardById(int cardId);
@@ -65,12 +64,11 @@ public interface DbAccess {
      * @param setId
      * @param percentCorrectThisSession
      * @param timeThisSession
-     * @param percentCorrectAllTime
      * @param totalTime
      * @param sessionsCompleted
      */
     void updateStats(int setId, float percentCorrectThisSession, int timeThisSession,
-                     float percentCorrectAllTime, int totalTime, int sessionsCompleted);
+                     int totalTime, int sessionsCompleted);
 
     /**
      *
